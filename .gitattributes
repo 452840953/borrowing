@@ -1,0 +1,6 @@
+## 使用 `.gitattributes` 配置文件
+具体就是在项目根目录添加文件名为`.gitattributes`的文本文件，写入如下格式的配置
+*.js linguist-language=java
+*.css linguist-language=java
+*.html linguist-language=java
+意思是将.js、css、html当作java语言来统计
