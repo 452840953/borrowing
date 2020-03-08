@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.borrowing.zwh.dao.EmailMapper" >
+  <resultMap id="BaseResultMap" type="com.borrowing.zwh.entity.Email" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from email
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.borrowing.zwh.entity.Email" >
+    insert into email (id, bid, `status`
+      )
+    values (#{id,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.borrowing.zwh.entity.Email" >
+    update email
+    set bid = #{bid,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, bid, `status`
+    from email
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByStatusandBid" resultMap="BaseResultMap" parameterType="com.borrowing.zwh.entity.Email" >
+    select id, bid, `status`
+    from email
+    where bid = #{bid,jdbcType=INTEGER}
+    and `status` = #{status,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, bid, `status`
+    from email
+  </select>
+</mapper>

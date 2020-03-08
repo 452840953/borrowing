@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>图书借阅小程序后台管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="assets/styles.css" rel="stylesheet" media="screen">
+     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+  <body id="login">
+    <div class="container">
+      <form class="form-signin" id="loginform" onsubmit="return false" action="#" method="post">
+        <h2 class="form-signin-heading">图书借阅小程序后台管理系统</h2>
+        <input type="text" id="username" name="username" class="input-block-level" placeholder="输入用户名">
+        <input type="password" id="password" name="password" class="input-block-level" placeholder="输入密码">
+        <button class="btn btn-large btn-primary" type="submit" id="loginbtn">登录</button>
+      </form>
+    </div> <!-- /container -->
+    <script src="vendors/jquery-1.9.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      $("#loginbtn").click(function(){
+        $.ajax({
+          //几个参数需要注意一下
+          type: "POST",//方法类型
+          dataType: "json",//预期服务器返回的数据类型
+          url: "/admin/login" ,//url
+          data: $('#loginform').serialize(),
+          success: function (result) {
+            console.log(result);//打印服务端返回的数据(调试用)
+            if (result.status == 1) {
+              alert(result.obj);
+              window.location.href="index.html";
+            }else{
+              alert(result.obj);
+            }
+          },
+          error : function() {
+            alert("异常！");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

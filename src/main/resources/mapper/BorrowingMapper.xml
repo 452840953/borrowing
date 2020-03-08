@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.borrowing.zwh.dao.BorrowingMapper" >
+  <resultMap id="BaseResultMap" type="com.borrowing.zwh.entity.Borrowing" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stuid" property="stuid" jdbcType="INTEGER" />
+    <result column="bookid" property="bookid" jdbcType="INTEGER" />
+    <result column="rd" property="rd" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="ct" property="ct" jdbcType="VARCHAR" />
+    <result column="ut" property="ut" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from borrowing
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.borrowing.zwh.entity.Borrowing" >
+    insert into borrowing (id, stuid, bookid,
+      rd, `status`, ct, ut
+      )
+    values (#{id,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, #{bookid,jdbcType=INTEGER},
+      #{rd,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{ct,jdbcType=VARCHAR}, #{ut,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.borrowing.zwh.entity.Borrowing" >
+    update borrowing
+    set stuid = #{stuid,jdbcType=INTEGER},
+      bookid = #{bookid,jdbcType=INTEGER},
+      rd = #{rd,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      ct = #{ct,jdbcType=VARCHAR},
+      ut = #{ut,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing order by id desc
+  </select>
+  <select id="selectByStuid" resultMap="BaseResultMap" parameterType="com.borrowing.zwh.entity.Borrowing">
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing
+    where stuid = #{stuid,jdbcType=INTEGER}
+    and status = #{status,jdbcType=VARCHAR} order by id desc
+  </select>
+  <select id="search" resultMap="BaseResultMap" parameterType="com.borrowing.zwh.model.Search" >
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing
+    where `${item}` like concat('%',#{search},'%') order by id desc
+  </select>
+  <select id="selectByBorrowing" resultMap="BaseResultMap" parameterType="com.borrowing.zwh.entity.Borrowing" >
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing
+    where bookid = #{bookid,jdbcType=INTEGER}
+    and status != "已经归还"
+  </select>
+  <select id="selectByBorrowing2" resultMap="BaseResultMap" parameterType="com.borrowing.zwh.entity.Borrowing" >
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing
+    where bookid = #{bookid,jdbcType=INTEGER}
+    and status != "已经归还" order by id desc
+  </select>
+  <select id="selectNotReturn" resultMap="BaseResultMap">
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing
+    where status != "已经归还" order by id desc
+  </select>
+  <select id="selectByBorrowingStatus" resultMap="BaseResultMap" parameterType="com.borrowing.zwh.entity.Borrowing" >
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing
+    where bookid = #{bookid,jdbcType=INTEGER}
+    and status = #{status,jdbcType=VARCHAR}
+    and stuid = #{stuid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByStatys" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing
+    where status = #{status,jdbcType=VARCHAR} order by id desc
+  </select>
+  <select id="selectByBookid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, stuid, bookid, rd, `status`, ct, ut
+    from borrowing
+    where bookid = #{bookid,jdbcType=INTEGER} order by id desc
+  </select>
+</mapper>

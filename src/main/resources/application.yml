@@ -1,0 +1,42 @@
+#端口号配置
+server:
+  port: 8088
+spring:
+  #邮件
+  mail:
+    host: smtp.qq.com #发送邮件服务器
+    username: 452840953@qq.com #发送邮件的邮箱地址
+    password:  luuxnstixvznbhad #客户端授权码，不是邮箱密码，这个在qq邮箱设置里面自动生成的
+    properties.mail.smtp.port: 465 #端口号465或587
+    from: 452840953@qq.com # 发送邮件的地址，和上面username一致
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    default-encoding: utf-8
+  #模板引擎配置
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+    servlet:
+      content-type: text/html
+
+  #静态文件配置
+  resources:
+    static-locations: file:D:/work/img/,classpath:/static,classpath:/META-INF/resources,classpath:/templates/
+  #jdbc配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_bookborrowing?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+#mybatis配置
+mybatis:
+  #映射文件路径
+  mapper-locations: classpath:mapper/*.xml
+  #模型所在的
+  type-aliases-package: com.xyz.mybatis.entity
+
+

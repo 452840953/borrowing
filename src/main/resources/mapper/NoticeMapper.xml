@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.borrowing.zwh.dao.NoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.borrowing.zwh.entity.Notice" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="ut" property="ut" jdbcType="VARCHAR" />
+    <result column="info" property="info" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from notice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.borrowing.zwh.entity.Notice" >
+    insert into notice (id, title, ut,
+      info)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{ut,jdbcType=VARCHAR},
+      #{info,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.borrowing.zwh.entity.Notice" >
+    update notice
+    set title = #{title,jdbcType=VARCHAR},
+      ut = #{ut,jdbcType=VARCHAR},
+      info = #{info,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, title, ut, info
+    from notice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, title, ut, info
+    from notice
+    order by id desc
+  </select>
+  <select id="search" resultMap="BaseResultMap" parameterType="com.borrowing.zwh.model.Search" >
+    select id, title, ut, info
+    from notice
+    where `${item}` like concat('%',#{search},'%')
+  </select>
+</mapper>

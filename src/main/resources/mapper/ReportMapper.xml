@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.borrowing.zwh.dao.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.borrowing.zwh.entity.Report">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="createtime" jdbcType="VARCHAR" property="createtime" />
+    <result column="info" jdbcType="LONGVARCHAR" property="info" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.borrowing.zwh.entity.Report">
+    insert into report (id, sid, createtime,
+      info)
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR},
+      #{info,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.borrowing.zwh.entity.Report">
+    update report
+    set sid = #{sid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      info = #{info,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, sid, createtime, info
+    from report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, sid, createtime, info
+    from report
+  </select>
+</mapper>

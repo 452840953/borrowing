@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图书借阅小程序后台管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="assets/styles.css" rel="stylesheet" media="screen">
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="index.html">图书借阅小程序后台管理系统</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span class="adminname"></span>  <i class="caret"></i>
+
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a tabindex="-1" href="changepassword.html">修改密码</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a tabindex="-1" onclick="logout()" href="#">注销</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3" id="sidebar">
+            <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                <li>
+                    <a href="index.html"><i class="icon-chevron-right"></i> 主面板</a>
+                </li>
+                <li class="active">
+                    <a href="book.html"><i class="icon-chevron-right"></i> 图书管理</a>
+                </li>
+                <li>
+                    <a href="lent.html"><i class="icon-chevron-right"></i> 借阅管理</a>
+                </li>
+                <li>
+                    <a href="student.html"><i class="icon-chevron-right"></i> 学生管理</a>
+                </li>
+                <li>
+                    <a href="notice.html"><i class="icon-chevron-right"></i> 公告管理</a>
+                </li>
+            </ul>
+        </div>
+        <!--/span-->
+        <div class="span9" id="content">
+            <!-- morris stacked chart -->
+            <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                    <div class="navbar navbar-inner block-header">
+                        <div class="muted pull-left">书籍修改</div>
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <form class="form-horizontal" id="changeform" onsubmit="return false" action="#" method="post">
+                                <fieldset>
+                                    <legend>书籍修改</legend>
+                                    <div class="control-group">
+                                        <label class="control-label" for="focusedInput">书号</label>
+                                        <div class="controls">
+                                            <input class="input-xlarge focused" id="id" name="id" readonly="readonly" type="text" value="请输入书号...">
+                                            <input class="input-xlarge focused" id="img" value="1" style="display: none" name="img" type="text" value="请输入书号...">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="focusedInput">状态</label>
+                                        <div class="controls">
+                                            <input class="input-xlarge focused" id="status" name="status" readonly="readonly" type="text" value="请输入状态...">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="focusedInput">封面</label>
+                                        <div class="controls">
+                                            <img src="" style="height: 150px;width: 100px" id="imgs">
+                                            <input class="input-xlarge" id="file" name="file" type="file">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="focusedInput">书名</label>
+                                        <div class="controls">
+                                            <input class="input-xlarge focused" id="name" name="name" type="text" value="请输入书名...">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="focusedInput">作者</label>
+                                        <div class="controls">
+                                            <input class="input-xlarge focused" id="ct" name="ct" type="text" value="请输入创建时间...">
+                                            <input class="input-xlarge focused" id="ut" style="display: none" name="ut" type="text" value="请输入创建时间...">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="textarea2">书本介绍</label>
+                                        <div class="controls">
+                                            <textarea class="input-xlarge" id="intro" name="intro" placeholder="输入介绍 ..." style="width: 810px; height: 200px"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary" id="changeb">保存</button>
+                                        <button type="reset" class="btn">重置</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+<!--/.fluid-container-->
+<link href="vendors/datepicker.css" rel="stylesheet" media="screen">
+<link href="vendors/uniform.default.css" rel="stylesheet" media="screen">
+<link href="vendors/chosen.min.css" rel="stylesheet" media="screen">
+
+<link href="vendors/wysiwyg/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
+
+<script src="vendors/jquery-1.9.1.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/jquery.uniform.min.js"></script>
+<script src="vendors/chosen.jquery.min.js"></script>
+<script src="vendors/bootstrap-datepicker.js"></script>
+
+<script src="vendors/wysiwyg/wysihtml5-0.3.0.js"></script>
+<script src="vendors/wysiwyg/bootstrap-wysihtml5.js"></script>
+
+<script src="vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
+
+<script type="text/javascript" src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="assets/form-validation.js"></script>
+
+<script src="assets/scripts.js"></script>
+<script src="base.js"></script>
+<script src="info.js"></script>
+<script>
+    var type = "book";
+    $(function() {
+        var user = iflogin();
+        $(".adminname").html(user.aname);
+
+        var info = getone(getQueryVariable("id"),type);
+        $("#imgs").attr('src',info.img);
+
+        pl(info);
+    });
+    function pl(info) {
+        for(var key in info){
+            console.log(key);
+            console.log(info[key]);
+            $("#"+key).val(info[key]);
+        }
+    }
+
+    $("#changeb").click(function(){
+        submit();
+    });
+
+    $("#file").change(function () {
+        console.log("change");
+        $("#ut").val("change");
+        var filePath = $(this).val(), //获取到input的value，里面是文件的路径
+            fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase(),
+            src = window.URL.createObjectURL(this.files[0]); //转成可以在本地预览的格式
+
+        // 检查是否是图片
+        if(!fileFormat.match(/.png|.jpg|.jpeg/)) {
+            alert('上传错误,文件格式必须为：png/jpg/jpeg');
+            return;
+        }else{
+            $('#imgs').attr('src', src);
+        }
+    });
+
+    function submit(){
+        var formData = new FormData();
+        formData.append("file", $("#file")[0].files[0]);    //生成一对表单属性
+        formData.append("name", $("#name").val());
+        formData.append("id", $("#id").val());
+        formData.append("status", $("#status").val());
+        formData.append("img", $("#img").val());
+        formData.append("ut", $("#ut").val());
+        formData.append("ct", $("#ct").val());
+        formData.append("intro", $("#intro").val());
+        $.ajax({
+            type: "POST",           //因为是传输文件，所以必须是post
+            url: 'book/change',         //对应的后台处理类的地址
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                alert(data.obj);
+                if(data.status==1){
+                    window.location.reload();
+                }
+            }
+        });
+    }
+</script>
+</body>
+
+</html>
