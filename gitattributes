@@ -1,0 +1,4 @@
+//仓库的根目录下创建 .gitattributes 文件，添加以下代码：
+*.js linguist-language=java
+*.css linguist-language=java
+*.html linguist-language=java
